@@ -130,7 +130,8 @@ function populateInfoWindow(marker, infowindow) {
 		infowindow.marker = marker;
 		setTimeout(function() {
                 marker.setAnimation(null);
-            	}, 2000);
+            	}, 2800);
+
 		//infowindow.setContent('<div>' + marker.title + '</div>');
 		//infowindow.open(map, marker);
 
@@ -146,11 +147,13 @@ function populateInfoWindow(marker, infowindow) {
 
  	function getStreetView(data, status) {
         if (status == google.maps.StreetViewStatus.OK) {
+        	
             var nearStreetViewLocation = data.location.latLng;
             var heading = google.maps.geometry.spherical.computeHeading(nearStreetViewLocation, marker.position);
                 infowindow.setContent('<h2>' + marker.title + '</h2>' + '<div id="pano">' + '</div>'
                 	+ '<a href="' + marker.content + '">' + marker.content + '</a>');
             var errorTimeout = setTimeout(function() { alert("Something went wrong"); }, 9000);
+            clearTimeout(errorTimeout);
             var panoramaOptions = {
                 position: nearStreetViewLocation,
                 pov: {
@@ -253,4 +256,6 @@ var ViewModel = function() {
     self.searchItem.subscribe(self.markerFilter);
 };
 
-
+function errorHandling() {
+	alert("Loading Google Maps Failed!! Please check your internet connection and try again.");
+};
