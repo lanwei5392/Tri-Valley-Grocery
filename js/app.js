@@ -147,12 +147,12 @@ function populateInfoWindow(marker, infowindow) {
 
  	function getStreetView(data, status) {
         if (status == google.maps.StreetViewStatus.OK) {
-        	
+        	clearTimeout(errorTimeout);
             var nearStreetViewLocation = data.location.latLng;
             var heading = google.maps.geometry.spherical.computeHeading(nearStreetViewLocation, marker.position);
                 infowindow.setContent('<h2>' + marker.title + '</h2>' + '<div id="pano">' + '</div>'
                 	+ '<a href="' + marker.content + '">' + marker.content + '</a>');
-            var errorTimeout = setTimeout(function() { alert("Something went wrong"); }, 9000);
+            var errorTimeout = setTimeout(function() { alert("Something went wrong"); }, 9000); 
             clearTimeout(errorTimeout);
             var panoramaOptions = {
                 position: nearStreetViewLocation,
