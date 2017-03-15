@@ -1,5 +1,3 @@
-var clientID = 'MLKAH00K10UJONDVU3MKL0D3AHMXNDTWVLO0VUXNYWFJVLIT';
-var clientSecret = '5T35BVD5RRXVJVKP3PTWG0OACJOHSXYU0O04OW5ORVBFAP1V';
 
 var locations = [
 	{	 
@@ -125,6 +123,7 @@ var vm = new ViewModel();
 ko.applyBindings(vm);
 }
 
+
 function populateInfoWindow(marker, infowindow) {
 	if (infowindow.marker != marker) {
 		infowindow.setContent('');
@@ -140,26 +139,39 @@ function populateInfoWindow(marker, infowindow) {
 		infowindow.marker = null;
 	});
 
-	// Use of foursquare API to populate info window
-    var foursquareUrl = 'https://api.foursquare.com/v2/venues/search?ll=' + marker.position.lat() + ',' + marker.position.lng() + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20161212' ;
 
-    $.getJSON(foursquareUrl, function(data){
-      // save the response from foursquare
-      var foursquareResponse = data.response.venues[0];
-      // Foursquare attribution
-      var foursquareUrl = 'https://foursquare.com/v/' + foursquareResponse.id;
-      // add information to info window
-      infowindow.setContent('<div class="infowindow-box"><div class="infowindow-heading"><strong>Name: <em style="color:blue">' + marker.title+ '</em></strong></div>' +
-        '<div><strong>FourSquare Link: </strong>' + '<a href="' + foursquareUrl + '">' + foursquareResponse.name + '</a></div>' +
-        '<div><strong>Category: </strong>' + foursquareResponse.categories[0].name + '</div>' +
-        '<div><strong>Address: </strong>' + foursquareResponse.location.formattedAddress + '</div></div>' );
-      // open info window
-      infowindow.open(map, marker);
-    }).fail(function(){
-      // if failed to open info window throw error
-      alert("\n*********!!! ERROR !!!*********\n\nThere is some problem in retrieving data from FourSquare");
-    });
+	var streetViewService = new google.maps.StreetViewService();
+    var radius = 50;
+        // In case the status is OK, which means the pano was found, compute the
+        // position of the streetview image, then calculate the heading, then get a
+        // panorama from that and set the options
 
+ 	function getStreetView(data, status) {
+        if (status == google.maps.StreetViewStatus.OK) {
+        	clearTimeout(errorTimeout);
+            var nearStreetViewLocation = data.location.latLng;
+            var heading = google.maps.geometry.spherical.computeHeading(nearStreetViewLocation, marker.position);
+                infowindow.setContent('<h2>' + marker.title + '</h2>' + '<div id="pano">' + '</div>'
+                	+ '<a href="' + marker.content + '">' + marker.content + '</a>');
+            var errorTimeout = setTimeout(function() { alert("Something went wrong"); }, 9000); 
+            clearTimeout(errorTimeout);
+            var panoramaOptions = {
+                position: nearStreetViewLocation,
+                pov: {
+                   heading: heading,
+                   pitch: 30
+                }
+            };
+
+            var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+            } else {
+              infowindow.setContent('<div>' + marker.title + '</div>' + '<div>No Street View Found</div>');
+            }
+    }
+    
+    streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+    // Open the infowindow on the correct marker.
+        infowindow.open(map, marker);
     }
 }
 
