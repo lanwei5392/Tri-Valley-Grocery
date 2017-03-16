@@ -39,6 +39,7 @@ hr {
   border: none;
 }
 #store-list {
+  border-collapse: collapse;
   font-size: 13px;
   height: 50%;
   width: 30%;

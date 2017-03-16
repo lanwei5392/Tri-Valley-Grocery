@@ -148,16 +148,18 @@ function populateInfoWindow(marker, infowindow) {
       var foursquareResponse = data.response.venues[0];
       // Foursquare attribution
       var foursquareUrl = 'https://foursquare.com/v/' + foursquareResponse.id;
+      var directionUrl = 'https://google.com/maps/dir//' + foursquareResponse.directionUrl;
       // add information to info window
       infowindow.setContent('<div class="infowindow-box"><div class="infowindow-heading"><strong>Name: <em style="color:blue">' + marker.title+ '</em></strong></div>' +
         '<div><strong>FourSquare Link: </strong>' + '<a href="' + foursquareUrl + '">' + foursquareResponse.name + '</a></div>' +
-        '<div><strong>Category: </strong>' + foursquareResponse.categories[0].name + '</div>' +
+        '<div><strong>Direction: </strong>' + '<a href="' + directionUrl + '">' + foursquareResponse.directionUrl + '</a></div>' +
+        //'<div><strong>Category: </strong>' + foursquareResponse.categories[0].name + '</div>' +
         '<div><strong>Address: </strong>' + foursquareResponse.location.formattedAddress + '</div></div>' );
       // open info window
       infowindow.open(map, marker);
     }).fail(function(){
       // if failed to open info window throw error
-      alert("\n*********!!! ERROR !!!*********\n\nThere is some problem in retrieving data from FourSquare");
+      alert("\n* ERROR *\n\nThere are some problems in retrieving data from FourSquare web");
     });
 
     }
