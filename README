@@ -1,0 +1,9 @@
+Neighborhood Map project: Tri-Valley-Grocery
+
+This is an one-page application featuring a map of grocery stores in Tri-Valley Bay Area, California. The map functionalities include these features. -Show up all grocery stores in Tri-Valley on the map and the store-list. -If click a marker or a store from the store-list, the related infowindow will provide Foursquare web link for browsing the store details and the direction. -Filter/search for special stores.
+
+How to get started
+
+Explore: https://lanwei5392.github.io/Tri-Valley-Grocery/
+
+Clone or download the repository: https://github.com/lanwei5392/Tri-Valley-Grocery
