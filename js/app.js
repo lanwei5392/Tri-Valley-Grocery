@@ -137,6 +137,7 @@ function populateInfoWindow(marker, infowindow) {
       infowindow.setContent('<div class="infowindow-box"><div class="infowindow-heading"><strong>Name: <em style="color:blue">' + marker.title+ '</em></strong></div>' +
         '<div><strong>FourSquare Link: </strong>' + '<a href="' + foursquareUrl + '">' + foursquareResponse.name + '</a></div>' +
         '<div><strong>Direction: </strong>' + '<a href="' + directionUrl + '">' + directionUrl + '</a></div>' +
+        //'<div><strong>Direction: </strong>' + '<a href="' + directionUrl + '">' + directionUrl + '</a></div>' + + '</a></div>' +
         '<div><strong>Address: </strong>' + foursquareResponse.location.formattedAddress + '</div></div>' );
       // open info window
       infowindow.open(map, marker);
