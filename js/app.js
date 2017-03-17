@@ -4,58 +4,43 @@ var clientSecret = '5T35BVD5RRXVJVKP3PTWG0OACJOHSXYU0O04OW5ORVBFAP1V';
 var locations = [
 	{	 
 		title: 'Safeway 11060 Bollinger Canyon Rd. San Ramon', 
-		location: {lat: 37.7736, lng: -121.92166},
-		content: 'http://local.safeway.com/ca/san-ramon-2712.html?utm_source=G&utm_medium=Maps&utm_campaign=G+Place'
-	},
-	{	 
-		title: 'Safeway 2505 San Ramon Valley Blvd. San Ramon', 
-		location: {lat: 37.7736, lng: -121.9776353},
-		content: 'http://local.safeway.com/ca/danville-1211.html'
+		location: {lat: 37.7741899, lng: -121.921662}
 	},
 	{	
 		title: 'Safeway 3496 Camino Tassajara, Danville', 
-		location: {lat: 37.79812270, lng: -121.917765},
-		content: 'http://local.safeway.com/ca/danville-1211.html'
+		location: {lat: 37.79812270, lng: -121.917765}
 	},
 	{	
 		title: 'Safeway 7499 Dublin Blvd. Dublin', 
-		location: {lat: 37.705697, lng: -121.9270399},
-		content: 'http://local.safeway.com/ca/dublin-1953.html'
+		location: {lat: 37.705697, lng: -121.9270399}
 	},
 	{ 
 		title: 'Safeway 4440 Tassajara Rd. Dublin', 
-		location: {lat: 37.7068065, lng: -121.8733686},
-		content: 'http://local.safeway.com/ca/dublin-1932.html'
+		location: {lat: 37.7068065, lng: -121.8733686}
 	},
 	{
 		title: 'Safeway 1701 Santa Rita Rd. Pleasanton', 
-		location: {lat: 37.6749034, lng: -121.8743729},
-		content: 'http://local.safeway.com/ca/pleasanton-1502.html'
+		location: {lat: 37.6749034, lng: -121.8743729}
 	},
 	{
 		title: 'Safeway 6790 Bernal Ave. Pleasanton', 
-		location: {lat: 37.656118, lng: -121.8994875},
-		content: 'http://local.safeway.com/ca/pleasanton-2856.html'
+		location: {lat: 37.656118, lng: -121.8994875}
 	},
 	{
 		title: 'Whole Foods Market 5200 Dublin Blvd, Dublin', 
-		location: {lat: 37.7057644, lng: -121.8898424},
-		content: 'http://www.wholefoodsmarket.com/stores/dublin-ca'
+		location: {lat: 37.7057644, lng: -121.8898424}
 	},
     {
     	title: 'Whole Foods Market 100 Sunset Dr., San Ramon', 
-    	location: {lat: 37.7617459, lng: -121.9612469},
-    	content: 'http://www.wholefoodsmarket.com/stores/ram'
+    	location: {lat: 37.7617459, lng: -121.9612469}
     },
     { 
     	title: '99 Ranch Market 4299 Rosewood Dr, Pleasanton', 
-    	location: {lat: 37.6994865, lng: -121.8732497},
-    	content: 'https://www.99ranch.com/stores/pleasanton-california'
+    	location: {lat: 37.6994865, lng: -121.8732497}
     },
     {
      	title: '99 Ranch Market 7333 Regional St, Dublin', 
-    	location: {lat: 37.7064817, lng: -121.9331843},
-    	content: 'https://www.99ranch.com/stores/dublin-california'
+    	location: {lat: 37.7064817, lng: -121.9331843}
     }
 ];
 var map;
@@ -133,9 +118,6 @@ function populateInfoWindow(marker, infowindow) {
                 marker.setAnimation(null);
             	}, 2800);
 
-		//infowindow.setContent('<div>' + marker.title + '</div>');
-		//infowindow.open(map, marker);
-
 	infowindow.addListener('closeclick', function() {
 		infowindow.marker = null;
 	});
@@ -148,14 +130,13 @@ function populateInfoWindow(marker, infowindow) {
       var foursquareResponse = data.response.venues[0];
       // Foursquare attribution
       var foursquareUrl = 'https://foursquare.com/v/' + foursquareResponse.id;
-      //var directionUrl = 'https://google.com/maps/dir//' + foursquareResponse.directionUrl;
+      // Get direction for the store
       var directionUrl = 'https://www.google.com/maps/dir/Current+Location/' +
                         marker.position.lat() + ',' + marker.position.lng();
       // add information to info window
       infowindow.setContent('<div class="infowindow-box"><div class="infowindow-heading"><strong>Name: <em style="color:blue">' + marker.title+ '</em></strong></div>' +
         '<div><strong>FourSquare Link: </strong>' + '<a href="' + foursquareUrl + '">' + foursquareResponse.name + '</a></div>' +
         '<div><strong>Direction: </strong>' + '<a href="' + directionUrl + '">' + directionUrl + '</a></div>' +
-        //'<div><strong>Category: </strong>' + foursquareResponse.categories[0].name + '</div>' +
         '<div><strong>Address: </strong>' + foursquareResponse.location.formattedAddress + '</div></div>' );
       // open info window
       infowindow.open(map, marker);
