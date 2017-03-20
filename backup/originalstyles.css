@@ -13,30 +13,35 @@ body {
   height: 100%;
   position: relative;
 }
-.sidebar {
-  border-collapse: collapse;
-  width: 35%;
-  height: 100%;
+input {
+  font-size: 12px;
 }
 h1 {
   color: #696969;
   font-size: 20px;
-  margin-left: 10px;
-  margin-top: 50px;
+  margin: 10 10 10 15;
   text-align: left;
   font-family: "PT Serif";
 }
-.search{
-  margin-left: 25px;
-  margin-top: 30px;
+#hide-listings,
+#show-listings {
+  margin-left: 7px;
+  width: 10%;
 }
-input {
-  font-size: 12px;
+.search{
+  margin-left: 0px;
+}
+hr {
+  background: #D0D7D9;
+  height: 1px;
+  margin: 20px 0 20px 0;
+  border: none;
 }
 #store-list {
-  margin-top: 30px;
+  border-collapse: collapse;
   font-size: 13px;
-  line-height: 25px;
+  height: 50%;
+  width: 30%;
 }
 #map {
   border: 2px solid #D3D3D3;
@@ -45,6 +50,21 @@ input {
   position: absolute;
   height: 100%;
   right: 0px;
+}
+.options-box {
+  background: #fff;
+  border: 1px solid #999;
+  border-radius: 3px;
+  height: 100%;
+  line-height: 35px;
+  padding: 5px 5px 5px 10px;
+  text-align: center;
+  width: 300px;
+}
+#pano {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
 }
 .text {
   font-size: 12px;

@@ -106,6 +106,11 @@ google.maps.event.addEventListener(window, 'resize', function() {
 */
 map.fitBounds(bounds);
 
+document.getElementById('show-listings').addEventListener('click', showListings);
+document.getElementById('hide-listings').addEventListener('click', function() {
+	hideMarkers(markers);
+});
+
 var vm = new ViewModel();
 ko.applyBindings(vm);
 }
@@ -189,13 +194,13 @@ var ViewModel = function() {
 
 	this.currentStore = ko.observable( this.storeList()[0] );
 
-	for (var i = 0; i < self.storeList().length; i++) {
+	for (var i = 0; i < locations.length; i++) {
 		this.storeList()[i].marker = markers[i];
 	};
 
 
 	this.selectedStore = function(clickedStore) {
-		for (var i = 0; i < self.storeList().length; i++) {
+		for (var i = 0; i < locations.length; i++) {
 			var title = self.storeList()[i].title;
 			if (clickedStore.title == title) {
 				this.currentStore = self.storeList()[i];

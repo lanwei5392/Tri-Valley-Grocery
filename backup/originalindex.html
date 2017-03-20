@@ -8,19 +8,20 @@
 </head>
 <body>
 	<div class="container">
-        <div class="sidebar">
-            <div class="title">
-                <h1>Find Grocery Stores in Tri-Valley</h1>
-            </div>
-            <div class="search">
-                <span>Search for Stores</span>
-                <input type="text" name="search" placeholder="Ex: Safeway" autocomplete="off" data-bind="textInput: searchItem">
-            </div>
-            <div id="store-list">
-                <ul data-bind="foreach: storeList">
-                    <li data-bind="text: title, click: $parent.selectedStore"></li>
-                </ul>
-            </div>
+		<div class="option-box">
+			<h1>Find Grocery Stores in Tri-Valley</h1>
+			<input id="show-listings" type="button" value="Show Listings">
+    		<input id="hide-listings" type="button" value="Hide Listings">
+		</div>
+        <div id="store-list">
+            <ul data-bind="foreach: storeList">
+                <li data-bind="text: title, click: $parent.selectedStore"></li>
+            </ul>
+        </div>
+        <hr>
+        <div class="search">
+            <span>Search for Stores</span>
+            <input type="text" name="search" placeholder="Ex: Safeway" autocomplete="off" data-bind="textInput: searchItem">
         </div>
 		<div id="map"></div>
 	</div>
