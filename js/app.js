@@ -99,11 +99,6 @@ marker.addListener('mouseout', function() {
 });
 }
 
-/*
-google.maps.event.addEventListener(window, 'resize', function() {
-	map.fitBounds(bounds);
-});
-*/
 map.fitBounds(bounds);
 
 var vm = new ViewModel();
@@ -122,23 +117,24 @@ function populateInfoWindow(marker, infowindow) {
 		infowindow.marker = null;
 	});
 
+
 	// Use of foursquare API to populate info window
-    var foursquareUrl = 'https://api.foursquare.com/v2/venues/search?ll=' + marker.position.lat() + ',' + marker.position.lng() + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20161212' ;
+    var foursquareUrl = 'https://api.foursquare.com/v2/venues/search?ll=' + marker.position.lat() + ',' + marker.position.lng() + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20161212';
 
     $.getJSON(foursquareUrl, function(data){
       // save the response from foursquare
       var foursquareResponse = data.response.venues[0];
       // Foursquare attribution
-      var foursquareUrl = 'https://foursquare.com/v/' + foursquareResponse.id;
+      var foursquareUrl = 'https://foursquare.com/v/' + foursquareResponse.id || 'No name can be found on foursquare web.';
       // Get direction for the store
       var directionUrl = 'https://www.google.com/maps/dir/Current+Location/' +
-                        marker.position.lat() + ',' + marker.position.lng();
+                        marker.position.lat() + ',' + marker.position.lng() || 'No direction can be found.';
+      var address = foursquareResponse.location.formattedAddress || 'Could not find this address on foursquare web.';
       // add information to info window
       infowindow.setContent('<div class="infowindow-box"><div class="infowindow-heading"><strong>Name: <em style="color:blue">' + marker.title+ '</em></strong></div>' +
         '<div><strong>FourSquare Link: </strong>' + '<a href="' + foursquareUrl + '">' + foursquareResponse.name + '</a></div>' +
         '<div><strong>Direction: </strong>' + '<a href="' + directionUrl + '">' + directionUrl + '</a></div>' +
-        //'<div><strong>Direction: </strong>' + '<a href="' + directionUrl + '">' + directionUrl + '</a></div>' + + '</a></div>' +
-        '<div><strong>Address: </strong>' + foursquareResponse.location.formattedAddress + '</div></div>' );
+        '<div><strong>Address: </strong>' + address + '</div></div>' );
       // open info window
       infowindow.open(map, marker);
     }).fail(function(){
