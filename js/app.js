@@ -49,8 +49,6 @@ var markers = [];
 
 var marker;
 
-var placeMarkers = [];
-
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 37.705697, lng: -121.9270399},
@@ -58,16 +56,15 @@ function initMap() {
 		mapTypeControl: false
 });
 
-
 var	largeInfowindow = new google.maps.InfoWindow();
-maxwidth: 200;
+var maxwidth = 200;
 
 var defaultIcon = makeMarkerIcon('0091ff');
 
 var highlightedIcon = makeMarkerIcon('ffff24');
+
 	
 var bounds = new google.maps.LatLngBounds();
-
 
 for (var i = 0; i < locations.length; i++) {
 	var position = locations[i].location;
@@ -87,6 +84,7 @@ markers.push(marker);
 
 bounds.extend(marker.position);
 
+
 marker.addListener('click', function() {
 	populateInfoWindow(this, largeInfowindow);
 });
@@ -97,6 +95,7 @@ marker.addListener('mouseover', function() {
 marker.addListener('mouseout', function() {
 	this.setIcon(defaultIcon);
 });
+
 }
 
 map.fitBounds(bounds);
@@ -145,25 +144,6 @@ function populateInfoWindow(marker, infowindow) {
     }
 }
 
-
-function showListings() {
-    var bounds = new google.maps.LatLngBounds();
-    // Extend the boundaries of the map for each marker and display the marker
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-        bounds.extend(markers[i].position);
-    }
-    map.fitBounds(bounds);
-}
-
-// This function will loop through the listings and hide them all.
-function hideMarkers(markers) {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
-    }
-}
-
-
 function makeMarkerIcon(markerColor) {
 	var markerImage = new google.maps.MarkerImage(
 		'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor +
@@ -187,7 +167,7 @@ var ViewModel = function() {
 
 	for (var i = 0; i < self.storeList().length; i++) {
 		this.storeList()[i].marker = markers[i];
-	};
+	}
 
 
 	this.selectedStore = function(clickedStore) {
@@ -196,9 +176,9 @@ var ViewModel = function() {
 			if (clickedStore.title == title) {
 				this.currentStore = self.storeList()[i];
 			}
-		};
+		}
 		this.marker.setAnimation(google.maps.Animation.BOUNCE);
-		google.maps.event.trigger(this.marker, 'click')
+		google.maps.event.trigger(this.marker, 'click');
 		
 	};
 
@@ -210,7 +190,7 @@ var ViewModel = function() {
                 self.storeList.push(locations[i]);
             }
         }
-    }
+    };
     
     self.markerFilter = function(value) {
         for (var i in locations) {
@@ -221,7 +201,7 @@ var ViewModel = function() {
                 locations[i].marker.setMap(map);
             }
         }  
-    }
+    };
 
     //Couple our search items with our search/marker filter functions
     self.searchItem.subscribe(self.searchFilter);
@@ -230,4 +210,4 @@ var ViewModel = function() {
 
 function errorHandling() {
 	alert("Loading Google Maps Failed!! Please check your internet connection and try again.");
-};
+}
