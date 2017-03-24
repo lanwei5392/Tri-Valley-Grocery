@@ -94,6 +94,7 @@ marker.addListener('mouseout', mouseOut);
 
 function openInfoWindow() {
   populateInfoWindow(this, largeInfowindow);
+  this.setAnimation(google.maps.Animation.BOUNCE);
 }
 
 function mouseOver() {
