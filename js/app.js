@@ -84,18 +84,24 @@ markers.push(marker);
 
 bounds.extend(marker.position);
 
+marker.addListener('click', openInfoWindow);
 
-marker.addListener('click', function() {
-	populateInfoWindow(this, largeInfowindow);
-});
+marker.addListener('mouseover', mouseOver);
 
-marker.addListener('mouseover', function() {
-	this.setIcon(highlightedIcon);
-});
-marker.addListener('mouseout', function() {
+marker.addListener('mouseout', mouseOut);
+
+}
+
+function openInfoWindow() {
+  populateInfoWindow(this, largeInfowindow);
+}
+
+function mouseOver() {
+ 	this.setIcon(highlightedIcon);
+}
+
+function mouseOut() {
 	this.setIcon(defaultIcon);
-});
-
 }
 
 map.fitBounds(bounds);
