@@ -6,18 +6,22 @@
 html,
 body {
   height: 100%;
-  margin: 0;
-  padding: 0;
+  width: 100%;
 }
 .container {
   height: 100%;
-  position: relative;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
-.sidebar {
-  border-collapse: collapse;
-  width: 35%;
+.siderbar {
   height: 100%;
+  width: 300px;
+  position: absolute;
+  transform: translate(-300px, 0);
+  transition: transform 0.3s, ease;
 }
+
 h1 {
   color: #696969;
   width: 100%;
