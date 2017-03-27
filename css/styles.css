@@ -2,26 +2,22 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
+
 html,
-body， 
-.container,
-map {
+body,
+.container  {
   height: 100%;
   width: 100%;
 }
-.sidebar {
-  height: 100%;
-  width: 300px;
-  position: absolute;
-  transform: translate(-300px, 0);
-  transition: transform 0.3s, ease;
-}
-sidebar.open {
-  transform: translate(0, 0);
-}
 
+.sidebar {
+  border-collapse: collapse;
+  width: 35%;
+  height: 100%;
+}
 h1 {
   color: #696969;
+  width: 100%;
   font-size: 20px;
   margin-left: 10px;
   margin-top: 0px;
@@ -41,22 +37,21 @@ input {
   font-size: 13px;
   line-height: 25px;
 }
-
+#map {
+  border: 2px solid #D3D3D3;
+  bottom:0px;
+  left: 360px;
+  position: absolute;
+  height: 100%;
+  right: 0px;
+}
 .text {
   font-size: 12px;
 }
 
-@media screen and (min-width: 600px) {
-    sidebar{
-      position: relative;
-      transform: translate(0, 0);
-    }
-    container {
-      display: flex;
-      flex-flow: row nowrap;
-    }
-    map {
-      width: auto;
-      flex-grow: 1;
+@media screen and (max-width: 800px) {
+    .container {
+    display: flex;
+    flex-flow: column wrap;
     }
 }
