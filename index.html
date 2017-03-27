@@ -7,19 +7,23 @@
 	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="sidebar">
-        <h1>Find Grocery Stores in Tri-Valley</h1>
-        <div class="search">
-            <span>Search for Stores</span>
-            <input type="text" name="search" placeholder="Ex: Safeway" autocomplete="off" data-bind="textInput: searchItem">
+	<div class="container">
+        <div class="sidebar">
+            <div class="title">
+                <h1>Find Grocery Stores in Tri-Valley</h1>
+            </div>
+            <div class="search">
+                <span>Search for Stores</span>
+                <input type="text" name="search" placeholder="Ex: Safeway" autocomplete="off" data-bind="textInput: searchItem">
+            </div>
+            <div id="store-list">
+                <ul data-bind="foreach: storeList">
+                    <li data-bind="text: title, click: $parent.selectedStore"></li>
+                </ul>
+            </div>
         </div>
-        <div id="store-list">
-            <ul data-bind="foreach: storeList">
-                <li data-bind="text: title, click: $parent.selectedStore"></li>
-            </ul>
-        </div>
-    </div>
-	<div id="map"></div>
+		<div id="map"></div>
+	</div>
 
     <script src="js/lib/knockout-3.2.0.js"></script>
     <script src="js/lib/jQuery.js"></script>
